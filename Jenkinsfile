@@ -2,6 +2,8 @@
 def serviceAmiIdChanged = [: ]
 
 pipeline {
+  agent none
+
   parameters{
 
     string(name='AWS_AGENT_LABEL',defaultValue='any',description='Label of the Agent which has python3 and aws profile configured')
@@ -10,7 +12,6 @@ pipeline {
     string(name='AWS_SERVICE_CONFIG_FILE',defaultValue='./config/config.json',description='Path of the aws service config file')
   }
 
-  agent none
   stages {
     stage('check the ami version') {
       agent  { label "${params.AWS_AGENT_LABEL}" }
