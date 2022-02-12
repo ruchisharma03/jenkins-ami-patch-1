@@ -46,7 +46,7 @@ pipeline {
         script {
 
           def jobList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
-          println(serviceList);
+          println(jobList);
           jobList["jobs"].each {
             eachJob ->
               if (!serviceAmiIdChanged["${eachJob.job_name}"]) {
