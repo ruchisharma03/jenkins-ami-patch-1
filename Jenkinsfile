@@ -50,7 +50,8 @@ pipeline {
             eachJob ->
               if (serviceAmiIdChanged["${eachJob.job_name}"]) {
 
-                build job:"${eachJob.job_name}" , parameters: ${eachJob.parameters}
+                println(eachJob.parameters.getClass());
+                build job:"${eachJob.job_name}" , parameters: "${eachJob.parameters}"
               }
 
           }
