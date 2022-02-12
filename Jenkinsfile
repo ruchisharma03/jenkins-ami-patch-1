@@ -1,5 +1,5 @@
 //  store 'region': 'latest ami is present or not'
-def regionAmiIdMatch = [: ]
+def serviceAmiIdChanged = [: ]
 
 pipeline {
   agent none
@@ -24,9 +24,9 @@ pipeline {
 
               String[] eachjobStatus = jobStatus.split(':');
 
-              if(eachjobStatus.size() > 1){
+              if (eachjobStatus.size() > 1) {
 
-                  regionAmiIdMatch[eachjobStatus[0]] = eachjobStatus[1];
+                serviceAmiIdChanged[eachjobStatus[0]] = eachjobStatus[1];
               }
 
             }
@@ -41,31 +41,37 @@ pipeline {
 
       agent any
 
-      steps{
+      steps {
 
-        script{
+        script {
 
-          def jobList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
-          println(jobList);
-          jobList["jobs"].each { eachJob -> println "Job Name: $eachJob.job_name" }
+          def serviceList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
+          println(serviceList);
+          serviceList["jobs"].each {
+            eachService ->
+              if (serviceAmiIdChanged[$serviceList.job_name]) {
+
+                println(eachService.job_name)
+              }
+
+          }
         }
       }
-
 
     }
 
   }
 
-  post{
-      always{
-          echo "====++++always++++===="
-      }
-      success{
-          echo "====++++only when successful++++===="
-      }
-      failure{
-          echo "====++++only when failed++++===="
-      }
+  post {
+    always {
+      echo "====++++always++++===="
+    }
+    success {
+      echo "====++++only when successful++++===="
+    }
+    failure {
+      echo "====++++only when failed++++===="
+    }
   }
 
 }
