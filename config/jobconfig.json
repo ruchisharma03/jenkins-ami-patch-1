@@ -5,7 +5,8 @@
         "parameters": [
           {
             "name": "message",
-            "value": ""
+            "value": "",
+            "type": "string"
           }
         ]
       }
