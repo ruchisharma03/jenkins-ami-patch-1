@@ -45,8 +45,13 @@ pipeline {
 
         script{
 
-          def projects = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
-          println(projects);
+          def jobList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
+          println(jobList);
+          for(var eachJob: jobList) {
+
+            println(eachJob);
+
+          }
         }
       }
 
