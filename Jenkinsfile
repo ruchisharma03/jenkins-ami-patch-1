@@ -31,7 +31,7 @@ pipeline {
 
             }
           }
-          echo "${regionAmiIdMatch}"
+          echo "${serviceAmiIdChanged}"
 
         }
       }
