@@ -1,10 +1,9 @@
 //  store 'region': 'if ami matched or not'
-def region_ami_id_match = [: ]
+def region_ami_id_match = [:]
 
 pipeline {
   agent none
   stages {
-
     stage('check the ami version') {
       agent any
       steps {

@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-from json import dumps 
-
 from utils.load_config import get_config
 from utils.utils import (get_latest_ami_version,
                          get_service_ami_version_from_lc,
