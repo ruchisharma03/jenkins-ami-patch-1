@@ -2,13 +2,13 @@
 def serviceAmiIdChanged = [: ]
 
 pipeline {
-  parameters([
+  parameters{[
 
     string(name='AWS_AGENT_LABEL',defaultValue='any',description='Label of the Agent which has python3 and aws profile configured'),
     string(name='AGENT_LABEL',defaultValue='any',description='Label of the Agent on which to execute the JOBS'),
     string(name='JOBCONFIG_FILE_PATH',defaultValue='config/jobconfig.json',description='Path of the job config file'),
     string(name='AWS_SERVICE_CONFIG_FILE',defaultValue='./config/config.json',description='Path of the aws service config file')
-  ])
+  ]}
 
   agent none
   stages {
