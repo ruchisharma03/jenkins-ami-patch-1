@@ -1,15 +1,24 @@
 {
-    "jobs": [
-      {
-        "job_name": "test",
-        "parameters": [
-          {
-            "name": "message",
-            "value": "bye",
-            "$class": "StringParameterValue"
-
-          }
-        ]
-      }
-    ]
+  "jobs": [
+    {
+      "job_name": "test",
+      "parameters": [
+        {
+          "name": "message",
+          "value": "bye",
+          "$class": "StringParameterValue"
+        }
+      ]
+    },
+    {
+      "job_name": "second",
+      "parameters": [
+        {
+          "name": "message",
+          "value": "bye",
+          "$class": "StringParameterValue"
+        }
+      ]
+    }
+  ]
 }
