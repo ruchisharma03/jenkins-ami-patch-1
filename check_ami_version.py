@@ -69,7 +69,7 @@ def check_ami_versions():
 def get_result():
     output  = ''
     for each_region in check_ami_versions():
-        output += each_region +":" + str(output[each_region]['MATCHED'])
+        output += each_region["SERVICE_NAME"] +":" + str(each_region['MATCHED'])
         output +="," 
     return output
 
