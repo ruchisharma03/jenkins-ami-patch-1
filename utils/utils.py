@@ -1,6 +1,7 @@
 #!/usr/bin/python3
+from audioop import reverse
 import boto3
-
+from datetime import datetime
 
 def prepare_boto_clients(services, regions):
 
@@ -40,6 +41,7 @@ def get_latest_ami_version(client, filters):
     if filters:
         images = client.describe_images(Filters=filters)
         if images and len(images['Images']):
+            images['Images'].sort(key=lambda image: image['CreationDate'],reverse=True)
             return images['Images'][0]['ImageId']
     return None 
 
