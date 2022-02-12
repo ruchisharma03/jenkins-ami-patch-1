@@ -4,17 +4,17 @@ def serviceAmiIdChanged = [: ]
 pipeline {
   agent none
 
-  parameters{
+  parameters {
 
-    string(name:'AWS_AGENT_LABEL',defaultValue:'any',description:'Label of the Agent which has python3 and aws profile configured')
-    string(name:'AGENT_LABEL',defaultValue:'any',description:'Label of the Agent on which to execute the JOBS')
-    string(name:'JOBCONFIG_FILE_PATH',defaultValue:'config/jobconfig.json',description:'Path of the job config file')
-    string(name:'AWS_SERVICE_CONFIG_FILE',defaultValue:'./config/config.json',description:'Path of the aws service config file')
+    string(name: 'AWS_AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent which has python3 and aws profile configured')
+    string(name: 'AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent on which to execute the JOBS')
+    string(name: 'JOBCONFIG_FILE_PATH', defaultValue: 'config/jobconfig.json', description: 'Path of the job config file')
+    string(name: 'AWS_SERVICE_CONFIG_FILE', defaultValue: './config/config.json', description: 'Path of the aws service config file')
   }
 
   stages {
     stage('check the ami version') {
-      agent  any
+      agent any
       steps {
         withCredentials([
           [
@@ -54,11 +54,11 @@ pipeline {
           def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
           println(jobConfig);
           if (serviceAmiIdChanged["${jobConfig.service_name}"]) {
-          println(jobConfig["${jobConfig.service_name}"]["jobs"])
-          jobConfig["${jobConfig.service_name}"]["jobs"].each {
-            eachJob ->
+            println(jobConfig["${jobConfig.service_name}"]["jobs"])
+            jobConfig["${jobConfig.service_name}"]["jobs"].each {
+              eachJob ->
                 build job: "${eachJob.job_name}", parameters: eachJob.parameters
-              }
+            }
 
           }
         }
