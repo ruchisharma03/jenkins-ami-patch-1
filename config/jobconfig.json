@@ -1,6 +1,7 @@
 {
-    "test": [
+    "jobs": [
       {
+        "job_name": "test",
         "parameters": [
           {
             "Name": "",
