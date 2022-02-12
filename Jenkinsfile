@@ -1,4 +1,4 @@
-//  store 'region': 'if ami matched or not'
+//  store 'region': 'latest ami is present or not'
 def regionAmiIdMatch = [: ]
 
 pipeline {
@@ -37,8 +37,12 @@ pipeline {
       }
     }
 
-    stage('build the job if the status is changed')
-  
+    stage('build the job if the latest ami id is present') {
+
+
+
+    }
+
   }
 
 }
