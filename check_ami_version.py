@@ -1,9 +1,9 @@
 import boto3 
-from os import getenv 
+from os import environ 
 
-REGIONS = getenv('REGIONS') 
-SERVICE_NAME = getenv('SERVICE_NAME') 
-FILTERS = getenv('FILTERS')  
+REGIONS = environ('REGIONS') 
+SERVICE_NAME = environ('SERVICE_NAME') 
+FILTERS = environ('FILTERS')  
  
 boto3_clients = [] 
 output = {} 
