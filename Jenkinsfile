@@ -29,7 +29,7 @@ pipeline {
 
       when {
         expression {
-          return region_ami_id_match["us-east-1"] == false
+            region_ami_id_match["us-east-1"]
         }
       }
       steps {
