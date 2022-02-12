@@ -47,11 +47,7 @@ pipeline {
 
           def jobList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
           println(jobList);
-          for(var eachJob: jobList) {
-
-            println(eachJob);
-
-          }
+          jobList["jobs"].each { eachJob -> println "Job Name: $eachJob.job_name" }
         }
       }
 
