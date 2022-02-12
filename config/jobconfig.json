@@ -1,9 +1,6 @@
 {
-  "region": {
-    "jobs": [
+    "test": [
       {
-        "region": [],
-        "job_name": "",
         "parameters": [
           {
             "Name": "",
@@ -13,5 +10,4 @@
         ]
       }
     ]
-  }
 }
