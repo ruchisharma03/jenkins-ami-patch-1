@@ -15,7 +15,6 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
           ]
         ]) {
-          // AWS Code
           script {
 
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
@@ -45,7 +44,7 @@ pipeline {
 
         script {
 
-          def jobList = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
+          def jobList = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
           println(jobList);
           jobList["jobs"].each {
             eachJob ->

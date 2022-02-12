@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from os import getenv
 from utils.load_config import get_config
 from utils.utils import (get_latest_ami_version,
                          get_service_ami_version_from_lc,
@@ -7,7 +8,7 @@ from utils.utils import (get_latest_ami_version,
                          )
 
                     
-CONFIG_FILE_PATH = './config/config.json' # config file path
+CONFIG_FILE_PATH = getenv('AWS_CONFIG_FILE') or './config/config.json' # config file path
 
 # check the ami versions
 def check_ami_versions():
