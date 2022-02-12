@@ -67,7 +67,9 @@ pipeline {
     }
     success {
       echo "====++++only when successful++++===="
-      jiraSendDeploymentInfo environmentId: '1', environmentName: 'test', environmentType: 'development', issueKeys: ['Test-11'], serviceIds: [''], site: 'raghav-personal.atlassian.net', state: 'pending'
+      jiraSendDeploymentInfo site: 'raghav-personal.atlassian.net', 
+      environmentId: 'us-prod1', environmentName: 'us-prod2', 
+      environmentType: 'production', issueKeys: ['DEV-001', 'DEV-002']
     }
     failure {
       echo "====++++only when failed++++===="
