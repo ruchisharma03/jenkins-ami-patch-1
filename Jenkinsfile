@@ -49,7 +49,7 @@ pipeline {
           println(jobList);
           jobList["jobs"].each {
             eachJob ->
-              if (!serviceAmiIdChanged["${eachJob.job_name}"]) {
+              if (serviceAmiIdChanged["${eachJob.job_name}"]) {
 
                 build job: '"${eachJob.job_name}"', parameters: "${eachJob.parameters}"
               }
