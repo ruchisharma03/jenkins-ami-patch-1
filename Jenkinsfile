@@ -16,7 +16,7 @@ pipeline {
         ]) {
           // AWS Code
           sh script:'''#!/bin/bash 
-                    ls
+                    ls -al
                     '''
 
         }
