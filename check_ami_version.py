@@ -63,6 +63,7 @@ def check_ami_versions():
                'NOT_MATCHED':not_matched
 
                }
+        print(result)
     return result
 
 # get the result in a compact manner
@@ -75,4 +76,5 @@ def get_result():
             output +="," 
     return output
 
-print(check_ami_versions())
+
+print(get_result())
