@@ -58,9 +58,7 @@ pipeline {
             
             def jobList = jobConfig["${serviceName}"];
 
-            println(jobList.jobs)
-
-            jobList.jobs.each {
+            jobList.each {
               eachJob -> 
                 build job: "${eachJob.job_name}", parameters: eachJob.parameters
               

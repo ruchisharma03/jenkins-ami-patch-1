@@ -2,26 +2,22 @@
   "service_name": "test",
   "test": [
     {
-      "jobs": [
+      "job_name": "first",
+      "parameters": [
         {
-          "job_name": "first",
-          "parameters": [
-            {
-              "name": "message",
-              "value": "1",
-              "$class": "StringParameterValue"
-            }
-          ]
-        },
+          "name": "message",
+          "value": "1",
+          "$class": "StringParameterValue"
+        }
+      ]
+    },
+    {
+      "job_name": "second",
+      "parameters": [
         {
-          "job_name": "second",
-          "parameters": [
-            {
-              "name": "message",
-              "value": "2",
-              "$class": "StringParameterValue"
-            }
-          ]
+          "name": "message",
+          "value": "2",
+          "$class": "StringParameterValue"
         }
       ]
     }
