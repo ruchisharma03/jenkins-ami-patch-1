@@ -54,8 +54,9 @@ pipeline {
           def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
           println(jobConfig);
           if (serviceAmiIdChanged["${jobConfig.service_name}"]) {
-            println(jobConfig["${jobConfig.service_name}"]["jobs"])
-            jobConfig["${jobConfig.service_name}"]["jobs"].each {
+            
+            def jobList = jobConfig["${jobConfig.service_name}"]
+            jobList["jobs"].each {
               eachJob ->
                 build job: "${eachJob.job_name}", parameters: eachJob.parameters
             }
