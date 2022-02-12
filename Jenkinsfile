@@ -67,17 +67,7 @@ pipeline {
     }
     success {
       echo "====++++only when successful++++===="
-      script{
-        def testIssue = [fields: [ project: [key: 'LEAR'],
-                                  summary: 'New JIRA Created from Jenkins.',
-                                  description: 'New JIRA Created from Jenkins.',
-                                  issuetype: [id: '10001']]]
-
-        response = jiraNewIssue issue: testIssue, site: 'raghav-personal.atlassian.net'
-
-        echo response.successful.toString()
-        echo response.data.toString()
-      }
+      jiraSendDeploymentInfo environmentId: '1', environmentName: 'LEARN', environmentType: 'development', issueKeys: ['10001'], serviceIds: [''], site: 'raghav-personal.atlassian.net', state: 'pending'
     }
     failure {
       echo "====++++only when failed++++===="
