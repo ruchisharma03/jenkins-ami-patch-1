@@ -1,0 +1,17 @@
+{
+  "region": {
+    "jobs": [
+      {
+        "region": "",
+        "job_name": "",
+        "parameters": [
+          {
+            "Name": "",
+            "Value": "",
+            "Type": ""
+          }
+        ]
+      }
+    ]
+  }
+}

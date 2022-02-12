@@ -1,5 +1,5 @@
 //  store 'region': 'if ami matched or not'
-def region_ami_id_match = [:]
+def region_ami_id_match = [: ]
 
 pipeline {
   agent none
@@ -23,6 +23,20 @@ pipeline {
 
         }
       }
+    }
+
+    stage('build job') {
+
+      when {
+        expression {
+          return region_ami_id_match["us-east-1"] == false
+        }
+      }
+      steps {
+
+        sh "echo trigger"
+      }
+
     }
   }
 
