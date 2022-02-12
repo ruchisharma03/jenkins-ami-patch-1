@@ -54,12 +54,8 @@ pipeline {
 
         script {
 
-          // def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
-          // def serviceName = jobConfig.service_name;
-
-          def jobConfig = new JsonSlurper().parse(new File("${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}"));
+          def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
           def serviceName = jobConfig.service_name;
-
 
           if (!serviceAmiIdChanged["${serviceName}"]) {
             
