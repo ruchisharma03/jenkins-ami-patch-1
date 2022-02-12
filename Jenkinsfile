@@ -16,7 +16,7 @@ pipeline {
         ]) {
           // AWS Code
           script {
-            def region_ami_id_match = sh(returnStdout: true, script: 'python3 check_ami_version.py')
+            region_ami_id_match = sh(returnStdout: true, script: 'python3 check_ami_version.py')
             echo "${region_ami_id_match}"
           }
 
