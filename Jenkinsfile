@@ -20,12 +20,12 @@ pipeline {
 
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
 
-            for (String eachjobStatus: result.split(',')) {
+            for (String jobStatus: result.split(',')) {
 
-              String[] status = eachjobStatus.split(':');
-              if(status.size() > 0){
+              String[] eachjobStatus = jobStatus.split(':');
+              if(eachjobStatus.size() > 0){
 
-                  regionAmiIdMatch[status[0]] = status[1];
+                  regionAmiIdMatch[eachjobStatus[0]] = eachjobStatus[1];
               }
 
             }
