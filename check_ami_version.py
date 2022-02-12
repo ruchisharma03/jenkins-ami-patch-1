@@ -20,7 +20,7 @@ def check_ami_version_from_lc(client):
 def compare_ami_versions(first_ami,second_ami):
     return first_ami == second_ami 
 
-
+print(REGIONS)
 
 if REGIONS:
         for each_region in REGIONS.split(','):
