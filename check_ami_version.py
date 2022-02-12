@@ -26,7 +26,6 @@ if REGIONS:
         for each_region in REGIONS.split(','):
             boto3_clients.append(boto3.client('ec2',region_name=each_region))
 
-print(boto3_clients)
 for each_client in boto3_clients:
     latest_ami_version = get_latest_ami_version(each_client)
     service_ami_version  = check_ami_version_from_lc(each_client)
