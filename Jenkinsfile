@@ -49,7 +49,7 @@ pipeline {
           println(serviceList);
           serviceList["jobs"].each {
             eachService ->
-              if (serviceAmiIdChanged[$serviceList.job_name]) {
+              if (serviceAmiIdChanged[$eachService.job_name]) {
 
                 println(eachService.job_name)
               }
