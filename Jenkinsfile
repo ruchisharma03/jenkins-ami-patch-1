@@ -27,14 +27,9 @@ pipeline {
 
     stage('build job') {
 
-      when {
-        expression {
-            region_ami_id_match["us-east-1"]
-        }
-      }
       steps {
 
-        sh "echo trigger"
+        sh "echo ${region_ami_id_match['us-east-1']}"
       }
 
     }
