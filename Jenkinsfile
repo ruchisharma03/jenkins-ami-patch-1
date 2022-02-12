@@ -39,6 +39,7 @@ pipeline {
     // create the jobs dynamically
     stage('build the job if the latest ami id is present') {
 
+      agent any
 
       steps{
 
