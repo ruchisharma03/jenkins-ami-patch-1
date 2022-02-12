@@ -67,7 +67,7 @@ pipeline {
     }
     success {
       echo "====++++only when successful++++===="
-      jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
+      // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
     }
     failure {
       echo "====++++only when failed++++===="
