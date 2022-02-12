@@ -15,7 +15,7 @@ pipeline {
           ]
         ]) {
           // AWS Code
-          sh 'python3 --version'
+          sh 'python3 check_ami_version.py'
 
         }
       }
