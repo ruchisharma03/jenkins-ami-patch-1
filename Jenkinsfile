@@ -27,6 +27,7 @@ pipeline {
 
     stage('build job') {
 
+      agent any
       steps {
 
         sh "echo ${region_ami_id_match.getClass()}"
