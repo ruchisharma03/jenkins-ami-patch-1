@@ -15,11 +15,7 @@ pipeline {
           ]
         ]) {
           // AWS Code
-          sh script:'''#!/bin/bash 
-                    set -e
-                    chmod +x check_ami_version.py
-                    sudo python3 check_ami_version.py
-                    '''
+          sh 'python3 check_ami_version.py'
 
         }
       }
