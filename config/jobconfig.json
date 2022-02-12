@@ -5,7 +5,9 @@
         "parameters": [
           {
             "name": "message",
-            "value": "bye"
+            "value": "bye",
+            "$class": "StringParameterValue"
+
           }
         ]
       }

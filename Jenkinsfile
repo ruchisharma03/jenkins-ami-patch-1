@@ -1,6 +1,4 @@
 //  store 'region': 'latest ami is present or not'
-import groovy.json.JsonSlurper
-
 def serviceAmiIdChanged = [: ]
 
 pipeline {
