@@ -1,5 +1,5 @@
 //  store 'region': 'if ami matched or not'
-def region_ami_id_match = [: ]
+def regionAmiIdMatch = [: ]
 
 pipeline {
   agent none
@@ -17,30 +17,22 @@ pipeline {
         ]) {
           // AWS Code
           script {
-            region_ami_id_match = sh(returnStdout: true, script: 'python3 check_ami_version.py')
-            echo "${region_ami_id_match}"
+
+            def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
+
+            for (String eachjobStatus: result.split(',')) {
+
+              String[] status = eachStatus.split(':');
+              regionAmiIdMatch[status[0]] = status[1];
+
+            }
+            echo "${regionAmiIdMatch}"
           }
 
         }
       }
     }
 
-    stage('build job') {
-
-      agent any
-      steps {
-
-        script {
-          
-           for(String s :region_ami_id_match.split(',')){
-
-                println(s)
-           }
-
-          }
-      }
-
-    }
   }
 
 }
