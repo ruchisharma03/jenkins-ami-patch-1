@@ -24,7 +24,7 @@ pipeline {
 
               String[] eachjobStatus = jobStatus.split(':');
 
-              println(eachjobStatus)
+              println(eachjobStatus.size())
 
               // if(eachjobStatus.size() > 0){
 
