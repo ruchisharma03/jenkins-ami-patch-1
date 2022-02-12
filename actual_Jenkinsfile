@@ -1,0 +1,31 @@
+//  store 'region': 'if ami matched or not'
+def regionAmiIdMatch = [: ]
+
+pipeline {
+  agent none
+  stages {
+    stage('check the ami version') {
+      agent any
+      steps {
+        script {
+
+          def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
+
+          for (String jobStatus: result.split(',')) {
+
+            String[] eachjobStatus = jobStatus.split(':');
+
+            if (eachjobStatus.size() > 1) {
+
+              regionAmiIdMatch[eachjobStatus[0]] = eachjobStatus[1];
+            }
+
+          }
+        }
+        echo "${regionAmiIdMatch}"
+
+      }
+    }
+  }
+
+}

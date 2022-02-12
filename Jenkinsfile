@@ -37,6 +37,8 @@ pipeline {
       }
     }
 
+    stage('build the job if the status is changed')
+  
   }
 
 }
