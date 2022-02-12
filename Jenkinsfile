@@ -1,6 +1,6 @@
 pipeline {
   agent any
-
+  def region_ami_id_match = [:]
   stages {
 
     stage('check the ami version') {
@@ -16,8 +16,8 @@ pipeline {
         ]) {
           // AWS Code
           script {
-            def status = sh(returnStdout: true, script: 'python3 check_ami_version.py')
-            echo "${status}"
+            def region_ami_id_match = sh(returnStdout: true, script: 'python3 check_ami_version.py')
+            echo "${region_ami_id_match}"
           }
 
         }
