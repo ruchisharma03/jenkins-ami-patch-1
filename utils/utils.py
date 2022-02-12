@@ -40,7 +40,9 @@ def get_latest_ami_version(client, filters):
     '''
     if filters:
         images = client.describe_images(Filters=filters)
+        print(images)
         if images and len(images['Images']):
+
             images['Images'].sort(key=lambda image: image['CreationDate'],reverse=True)
             return images['Images'][0]['ImageId']
     return None 
@@ -57,11 +59,15 @@ def get_service_ami_version_from_lc(client, service_name):
     '''
     if service_name:
         launch_configurations = client.describe_launch_configurations()
+       
         if launch_configurations and len(launch_configurations['LaunchConfigurations']):
-            launch_configurations = list(filter(lambda lc: lc['LaunchConfigurationName'].find(
+            for i in launch_configurations['LaunchConfigurations']:
+                print(i['LaunchConfigurationName'],i['ImageId'])
+            filtered_launch_configurations = list(filter(lambda lc: lc['LaunchConfigurationName'].find(
                 service_name) != -1, launch_configurations['LaunchConfigurations']))
-            if len(launch_configurations):
-                return launch_configurations[0]['ImageId']
+            print(filtered_launch_configurations)
+            if len(filtered_launch_configurations):
+                return filtered_launch_configurations[0]['ImageId']
     return None 
 
 

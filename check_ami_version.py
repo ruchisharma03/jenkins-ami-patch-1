@@ -75,4 +75,4 @@ def get_result():
             output +="," 
     return output
 
-print(get_result())
+print(check_ami_versions())

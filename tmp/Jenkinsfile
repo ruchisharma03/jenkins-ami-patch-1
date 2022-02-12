@@ -34,7 +34,6 @@ pipeline {
           }
         }
       }
-    }
     // create the jobs dynamically
     stage('build the job if the latest ami id is present') {
 
@@ -71,11 +70,10 @@ pipeline {
     }
     success {
       echo "====++++only when successful++++===="
-      // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
+      
     }
     failure {
       echo "====++++only when failed++++===="
     }
   }
-
 }

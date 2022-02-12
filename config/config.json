@@ -6,11 +6,11 @@
       "filters": [
         {
           "Name": "name",
-          "Values": ["postgres-sql-ami"]
+          "Values": ["bv/amzn2-ami-hvm-2.0.????????.?-x86_64-gp2*"]
         }
       ]
     },
-    "service_name": "test"
+    "service_name": "second"
   }
 }
 
