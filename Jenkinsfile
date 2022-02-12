@@ -54,7 +54,7 @@ pipeline {
           def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
           def serviceName = jobConfig.service_name;
 
-          if (serviceAmiIdChanged["${serviceName}"]) {
+          if (!serviceAmiIdChanged["${serviceName}"]) {
             
             def jobList = jobConfig["${serviceName}"];
 
