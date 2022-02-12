@@ -4,9 +4,8 @@
         "job_name": "test",
         "parameters": [
           {
-            "Name": "",
-            "Value": "",
-            "Type": ""
+            "name": "message",
+            "value": ""
           }
         ]
       }
