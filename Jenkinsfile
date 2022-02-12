@@ -2,6 +2,7 @@
 def region_ami_id_match = [: ]
 
 pipeline {
+  agent none
   stages {
 
     stage('check the ami version') {
