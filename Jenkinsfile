@@ -30,7 +30,14 @@ pipeline {
       agent any
       steps {
 
-        sh "echo ${region_ami_id_match.getClass()}"
+        script {
+          
+           for(String s :region_ami_id_match.split(',')){
+
+                println(s)
+           }
+
+          }
       }
 
     }
