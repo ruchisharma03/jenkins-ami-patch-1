@@ -15,7 +15,7 @@ pipeline {
           ]
         ]) {
           // AWS Code
-          def status = sh returnStdout: true,script:'python3 check_ami_version.py'
+          def status = sh(returnStdout: true,script:'python3 check_ami_version.py')
           echo "${status}"
         }
       }
