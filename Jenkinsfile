@@ -52,7 +52,7 @@ pipeline {
             eachJob ->
               if (serviceAmiIdChanged["${eachJob.job_name}"]) {
 
-                println(jsonSlurper.parseText(eachJob.parameters));
+                println(new JsonSlurper().parseText(eachJob.parameters));
                 build job:"${eachJob.job_name}" , parameters: "${eachJob.parameters}"
               }
 
