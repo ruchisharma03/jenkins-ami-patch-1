@@ -67,8 +67,8 @@ def check_ami_versions():
 
 # get the result in a compact manner
 def get_result():
-    output = check_ami_versions()
-    for each_region in output:
+    output  = ''
+    for each_region in check_ami_versions():
         output += each_region +":" + str(output[each_region]['MATCHED'])
         output +="," 
     return output
