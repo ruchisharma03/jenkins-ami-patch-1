@@ -36,13 +36,25 @@ pipeline {
         }
       }
     }
-
+    // create the jobs dynamically
     stage('build the job if the latest ami id is present') {
 
 
 
     }
 
+  }
+
+  post{
+      always{
+          echo "====++++always++++===="
+      }
+      success{
+          echo "====++++only when successful++++===="
+      }
+      failure{
+          echo "====++++only when failed++++===="
+      }
   }
 
 }

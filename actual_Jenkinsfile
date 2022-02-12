@@ -1,4 +1,4 @@
-//  store 'region': 'if ami matched or not'
+//  store 'region': 'latest ami is present or not'
 def regionAmiIdMatch = [: ]
 
 pipeline {
