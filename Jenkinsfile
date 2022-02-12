@@ -71,9 +71,9 @@ pipeline {
         def testIssue = [fields: [ project: [key: 'RFC'],
                                   summary: 'New JIRA Created from Jenkins.',
                                   description: 'New JIRA Created from Jenkins.',
-                                  issuetype: [id: '10500']]]
+                                  issuetype: [id: '10002']]]
 
-        response = jiraNewIssue issue: testIssue, site: 'raghav-personal.atlassian.net'
+        response = jiraNewIssue issue: testIssue, site: 'raghav-personal'
 
         echo response.successful.toString()
         echo response.data.toString()
