@@ -56,7 +56,7 @@ pipeline {
 
           if (serviceAmiIdChanged["${serviceName}"]) {
             
-            def jobList = jobConfig["$[serviceName}"];
+            def jobList = jobConfig["${serviceName}"];
 
             jobList["jobs"].each {
               eachJob ->
