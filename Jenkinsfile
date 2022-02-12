@@ -1,4 +1,6 @@
 //  store 'region': 'latest ami is present or not'
+import groovy.json.JsonSlurper
+
 def serviceAmiIdChanged = [: ]
 
 pipeline {
@@ -50,7 +52,7 @@ pipeline {
             eachJob ->
               if (serviceAmiIdChanged["${eachJob.job_name}"]) {
 
-                println(eachJob.parameters);
+                println(jsonSlurper.parseText(eachJob.parameters));
                 build job:"${eachJob.job_name}" , parameters: "${eachJob.parameters}"
               }
 
