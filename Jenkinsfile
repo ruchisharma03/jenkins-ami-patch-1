@@ -24,12 +24,10 @@ pipeline {
 
               String[] eachjobStatus = jobStatus.split(':');
 
-              println(eachjobStatus.size())
+              if(eachjobStatus.size() > 1){
 
-              // if(eachjobStatus.size() > 0){
-
-              //     regionAmiIdMatch[eachjobStatus[0]] = eachjobStatus[1];
-              // }
+                  regionAmiIdMatch[eachjobStatus[0]] = eachjobStatus[1];
+              }
 
             }
           }
