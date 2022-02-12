@@ -1,5 +1,5 @@
 //  store 'region': 'latest ami is present or not'
-import groovy.json.JsonSlurper;
+import groovy.json.*;
 
 def serviceAmiIdChanged = [: ]
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
@@ -53,11 +53,13 @@ pipeline {
       steps {
 
         script {
-          def jsonSlurper = new JsonSlurper()
-          def reader = new BufferedReader(new InputStreamReader(new FileInputStream("${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}"),"UTF-8"))
-          def jobConfig = jsonSlurper.parse(reader)  
+
           // def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
+          // def serviceName = jobConfig.service_name;
+
+          def jobConfig = new JsonSlurper().parse(new File("${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}"));
           def serviceName = jobConfig.service_name;
+
 
           if (!serviceAmiIdChanged["${serviceName}"]) {
             
