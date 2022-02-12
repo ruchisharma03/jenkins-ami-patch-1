@@ -29,7 +29,7 @@ pipeline {
 
       steps {
 
-        sh "echo ${region_ami_id_match['us-east-1']}"
+        sh "echo ${region_ami_id_match.getClass()}"
       }
 
     }
