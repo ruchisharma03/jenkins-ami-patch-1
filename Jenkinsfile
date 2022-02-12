@@ -23,8 +23,10 @@ pipeline {
             for (String eachjobStatus: result.split(',')) {
 
               String[] status = eachjobStatus.split(':');
-              println(status[1]);
-              // regionAmiIdMatch[status[0]] = status[1];
+              if(status.size > 0){
+
+                  regionAmiIdMatch[status[0]] = status[1];
+              }
 
             }
             echo "${regionAmiIdMatch}"
