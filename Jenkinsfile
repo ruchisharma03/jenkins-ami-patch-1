@@ -14,7 +14,7 @@ pipeline {
 
   stages {
     stage('check the ami version') {
-      agent  { label "${params.AWS_AGENT_LABEL}" }
+      agent  any
       steps {
         withCredentials([
           [
@@ -47,7 +47,7 @@ pipeline {
     // create the jobs dynamically
     stage('build the job if the latest ami id is present') {
 
-      agent { label "${params.AGENT_LABEL}" }
+      agent any
 
       steps {
 
