@@ -67,15 +67,17 @@ pipeline {
     }
     success {
       echo "====++++only when successful++++===="
-      def testIssue = [fields: [ project: [key: 'RFC'],
-                                 summary: 'New JIRA Created from Jenkins.',
-                                 description: 'New JIRA Created from Jenkins.',
-                                 issuetype: [id: '10500']]]
+      script{
+        def testIssue = [fields: [ project: [key: 'RFC'],
+                                  summary: 'New JIRA Created from Jenkins.',
+                                  description: 'New JIRA Created from Jenkins.',
+                                  issuetype: [id: '10500']]]
 
-      response = jiraNewIssue issue: testIssue, site: 'JIRA T'
+        response = jiraNewIssue issue: testIssue, site: 'JIRA T'
 
-      echo response.successful.toString()
-      echo response.data.toString()
+        echo response.successful.toString()
+        echo response.data.toString()
+      }
     }
     failure {
       echo "====++++only when failed++++===="
