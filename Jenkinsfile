@@ -3,7 +3,7 @@ pipeline {
 
   stages {
 
-    stage('build a job') {
+    stage('check the ami version') {
 
       steps {
         withCredentials([
