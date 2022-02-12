@@ -3,7 +3,6 @@
 
 from json import load
 
-config_dict = {}
 
 
 def get_config(config_file_path):
@@ -23,6 +22,7 @@ def get_config(config_file_path):
     )
 
     '''
+    config_dict = {}
 
     with open(config_file_path) as fp:
         config_data = load(fp)
