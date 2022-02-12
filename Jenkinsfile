@@ -40,6 +40,15 @@ pipeline {
     stage('build the job if the latest ami id is present') {
 
 
+      steps{
+
+        script{
+
+          def projects = readJSON file: "${env.WORKSPACE}/config/jobconfig.json";
+          println(projects);
+        }
+      }
+
 
     }
 
