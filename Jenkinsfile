@@ -51,7 +51,7 @@ pipeline {
             eachJob ->
               if (serviceAmiIdChanged["${eachJob.job_name}"]) {
 
-                println('"${eachJob.job_name}"' + "${eachJob.parameters}")
+                println("${eachJob.job_name}" + "${eachJob.parameters}")
               }
 
           }
