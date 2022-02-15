@@ -54,8 +54,20 @@ pipeline {
 
         script {
 
-            def jsonOutput = sh(returnStdout: true, script: 'cat "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}"')
-            println(jsonOutput)
+          def jobConfig = readJSON file: "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}";
+          def serviceName = jobConfig.service_name;
+
+          if (!serviceAmiIdChanged["${serviceName}"]) {
+            
+            def jobList = jobConfig["${serviceName}"];
+
+            jobList.each {
+              eachJob -> 
+                build job: "${eachJob.job_name}", parameters: eachJob.parameters
+              
+            }
+
+          }
         }
       }
 
