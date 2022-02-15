@@ -69,11 +69,11 @@ pipeline {
                   build job: "${eachJob}"
                   post {
                     success {
-                      echo "====++++only when successful++++===="
+                      echo "====++++${eachJob} successful++++===="
                       // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
                     }
                     failure {
-                      echo "====++++only when failed++++===="
+                      echo "====++++${eachJob} failed++++===="
                     }
                   }
 
