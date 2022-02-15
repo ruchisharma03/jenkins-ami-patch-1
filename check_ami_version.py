@@ -8,10 +8,10 @@ from utils.utils import (get_latest_ami_version,
                          )
 
 
-CONFIG_FILE_PATH = getenv('AWS_SERVICE_CONFIG_FILE')  or './config/config.json'# config file path
+CONFIG_FILE_PATH = getenv(
+    'AWS_SERVICE_CONFIG_FILE') or './config/config.json'  # config file path
+    
 # check the ami versions
-
-
 def check_ami_versions():
 
     status_map = {}
@@ -74,14 +74,13 @@ def check_ami_versions():
 
     return status_map
 
-# get the result in a compact manner
 
-
+# get the result in a compact manner for groovy
 def get_result():
 
     result = check_ami_versions()
     output = ''
-    for service_name,each_service in result.items():
+    for service_name, each_service in result.items():
         output += service_name + \
             ":" + str(each_service['AMI_CHANGED'])
         output += ","
