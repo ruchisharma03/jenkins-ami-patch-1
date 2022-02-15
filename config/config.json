@@ -1,16 +1,32 @@
 {
   "regions": ["us-east-1","ap-south-1"],
-  "services": ["ec2","autoscaling"],
-  "us-east-1": {
-    "images": {
-      "filters": [
-        {
-          "Name": "name",
-          "Values": ["postgresql"]
-        }
-      ]
+  "aws_boto_clients": ["ec2","autoscaling"],
+  "services": [
+    {
+      "images": {
+        "filters": [
+          {
+            "Name": "name",
+            "Values": ["postgres-sql-ami"]
+          }
+        ]
+      },
+      "service_name": "first",
+      "regions": ["us-east-1","ap-south-1"]
     },
-    "service_name": "second"
-  }
+    {
+      "images": {
+        "filters": [
+          {
+            "Name": "name",
+            "Values": ["postgres-sql-ami"]
+          }
+        ]
+      },
+      "service_name": "second",
+      "regions": ["ap-south-1"]
+
+    }
+  ]
 }
 

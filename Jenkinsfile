@@ -1,6 +1,4 @@
 //  store 'region': 'latest ami is present or not'
-import groovy.json.*;
-
 def serviceAmiIdChanged = [: ]
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
@@ -54,8 +52,6 @@ pipeline {
 
         script {
 
-            def jsonOutput = sh(returnStdout: true, script: "cat ${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH} | jq .test[0].parameters")
-            build job: "first", parameters: jsonOutput
         }
       }
 

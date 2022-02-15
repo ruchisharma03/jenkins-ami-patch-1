@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-from audioop import reverse
 import boto3
-from datetime import datetime
 
 def prepare_boto_clients(services, regions):
 
@@ -40,7 +38,6 @@ def get_latest_ami_version(client, filters):
     '''
     if filters:
         images = client.describe_images(Filters=filters)
-        print(images)
         if images and len(images['Images']):
 
             images['Images'].sort(key=lambda image: image['CreationDate'],reverse=True)
@@ -61,11 +58,8 @@ def get_service_ami_version_from_lc(client, service_name):
         launch_configurations = client.describe_launch_configurations()
        
         if launch_configurations and len(launch_configurations['LaunchConfigurations']):
-            for i in launch_configurations['LaunchConfigurations']:
-                print(i['LaunchConfigurationName'],i['ImageId'])
             filtered_launch_configurations = list(filter(lambda lc: lc['LaunchConfigurationName'].find(
                 service_name) != -1, launch_configurations['LaunchConfigurations']))
-            print(filtered_launch_configurations)
             if len(filtered_launch_configurations):
                 return filtered_launch_configurations[0]['ImageId']
     return None 
