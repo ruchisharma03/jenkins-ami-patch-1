@@ -64,18 +64,15 @@ pipeline {
 
               if (serviceAmiIdChanged["${eachJob}"]) {
 
-                stage("QA-${eachJob}") {
+                try{
+                  stage("QA-${eachJob}") {
 
-                  build job: "${eachJob}"
-                  post {
-                    success {
-                      echo "====++++${eachJob} successful++++===="
-                      // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
-                    }
-                    failure {
-                      echo "====++++${eachJob} failed++++===="
-                    }
+                    build job: "${eachJob}"
+
                   }
+                }catch(Exception e){
+
+                    echo "${eachJob} failed"
 
                 }
 
