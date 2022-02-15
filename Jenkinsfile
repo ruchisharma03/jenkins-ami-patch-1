@@ -75,6 +75,7 @@ pipeline {
                 }catch(Exception e){
 
                     echo "${eachJob} failed"
+                    emailext body: 'job failed', recipientProviders: [buildUser()], subject: 'JOB FAILED', to: 'ragaws1674@gmail.com'
                     throw e;
 
                 }
