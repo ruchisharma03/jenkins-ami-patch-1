@@ -1,6 +1,5 @@
 //  store 'region': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
-def isQAJobSuccess = true;
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
 pipeline {
@@ -57,7 +56,6 @@ pipeline {
 
         script {
 
-          def isPreviousJobSuccess = true;
 
           String[] jobList = params.JOB_NAMES.split(',');
 
@@ -65,19 +63,17 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False' && isPreviousJobSuccess) {
+              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
 
                 try{
                   stage("QA-${eachJob}") {
 
-                    isPreviousJobSuccess = true;
+               
                     build job: "${eachJob}"
 
                   }
                 }catch(Exception e){
 
-                    isPreviousJobSuccess = false;
-                    isQAJobSuccess = false;
                     echo "${eachJob} failed"
                     throw e;
 
