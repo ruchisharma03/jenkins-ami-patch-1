@@ -52,7 +52,7 @@ pipeline {
 
       agent any
 
-      steps{
+      steps {
 
         script {
 
@@ -66,19 +66,17 @@ pipeline {
 
                 stage("QA-${eachJob}") {
 
-                
-                          build job: "${eachJob}"
-                  
-                
-                }
-                post {
-                  success {
-                    echo "====++++only when successful++++===="
-                    // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
+                  build job: "${eachJob}"
+                  post {
+                    success {
+                      echo "====++++only when successful++++===="
+                      // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
+                    }
+                    failure {
+                      echo "====++++only when failed++++===="
+                    }
                   }
-                  failure {
-                    echo "====++++only when failed++++===="
-                  }
+
                 }
 
               }
