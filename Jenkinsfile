@@ -56,7 +56,6 @@ pipeline {
 
         script {
 
-
           String[] jobList = params.JOB_NAMES.split(',');
 
           if (jobList.size() > 0) {
@@ -65,19 +64,18 @@ pipeline {
 
               if (serviceAmiIdChanged["${eachJob}"] == 'False') {
 
-                try{
+                try {
                   stage("QA-${eachJob}") {
 
-               
                     build job: "${eachJob}"
-                   // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
+                    // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
                   }
-                }catch(Exception e){
+                } catch (Exception e) {
 
-                    echo "${eachJob} failed"
-                   // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
-                    throw e;
+                  echo "${eachJob} failed"
+                  // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
+                  throw e;
 
                 }
 
