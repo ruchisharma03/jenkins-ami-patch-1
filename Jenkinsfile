@@ -70,13 +70,13 @@ pipeline {
 
                
                     build job: "${eachJob}"
-                    emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
+                   // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
                   }
                 }catch(Exception e){
 
                     echo "${eachJob} failed"
-                    emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
+                   // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
                     throw e;
 
                 }
