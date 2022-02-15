@@ -66,9 +66,9 @@ pipeline {
 
                 stage("QA-${eachJob}") {
 
-                  steps{
+                
                           build job: "${eachJob}"
-                  }
+                  
                 
                 }
                 post {
