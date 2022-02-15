@@ -61,11 +61,14 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (!serviceAmiIdChanged["${eachJob}"]) {
+              if (serviceAmiIdChanged["${eachJob}"]) {
 
                 stage("QA-${eachJob}") {
 
-                  build job: "${eachJob}"
+                  steps{
+                          build job: "${eachJob}"
+                  }
+                
                 }
                 post {
                   success {
