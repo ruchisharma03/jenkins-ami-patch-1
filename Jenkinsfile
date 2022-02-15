@@ -1,5 +1,6 @@
 //  store 'region': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
+def isQAJobSuccess = true;
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
 pipeline {
@@ -76,7 +77,9 @@ pipeline {
                 }catch(Exception e){
 
                     isPreviousJobSuccess = false;
+                    isQAJobSuccess = false;
                     echo "${eachJob} failed"
+                    throw e;
 
                 }
 
@@ -98,7 +101,7 @@ pipeline {
       echo "====++++always++++===="
     }
     success {
-      echo "====++++only when successful++++===="
+      echo "====++++only when successful ${isQAJobSuccess}++++===="
       // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
     }
     failure {
