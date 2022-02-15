@@ -56,22 +56,26 @@ pipeline {
 
         script {
 
+          def isPreviousJobSuccess = true;
+
           String[] jobList = params.JOB_NAMES.split(',');
 
           if (jobList.size() > 0) {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"]) {
+              if (serviceAmiIdChanged["${eachJob}"] == 'False' && isPreviousJobSuccess) {
 
                 try{
                   stage("QA-${eachJob}") {
 
+                    isPreviousJobSuccess = true;
                     build job: "${eachJob}"
 
                   }
                 }catch(Exception e){
 
+                    isPreviousJobSuccess = false;
                     echo "${eachJob} failed"
 
                 }
