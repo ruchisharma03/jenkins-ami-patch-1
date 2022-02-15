@@ -54,8 +54,8 @@ pipeline {
 
         script {
 
-            def jsonOutput = sh(returnStdout: true, script: "cat ${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}")
-            println(jsonOutput)
+            def jsonOutput = sh(returnStdout: true, script: "cat ${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH} | jq .test[0].parameters")
+            build job: "first", parameters: jsonOutput
         }
       }
 
