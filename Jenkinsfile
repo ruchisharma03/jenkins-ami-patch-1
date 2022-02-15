@@ -54,7 +54,7 @@ pipeline {
 
         script {
 
-            def jsonOutput = sh(returnStdout: true, script: 'cat "${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}"')
+            def jsonOutput = sh(returnStdout: true, script: "cat ${env.WORKSPACE}/${params.JOBCONFIG_FILE_PATH}")
             println(jsonOutput)
         }
       }
