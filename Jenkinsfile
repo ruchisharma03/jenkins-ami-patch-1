@@ -100,7 +100,7 @@ pipeline {
       echo "====++++always++++===="
     }
     success {
-      echo "====++++only when successful ${isQAJobSuccess}++++===="
+      echo "====++++only when successful ++++===="
       // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
     }
     failure {
