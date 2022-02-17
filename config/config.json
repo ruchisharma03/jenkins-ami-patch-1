@@ -12,6 +12,7 @@
         ]
       },
       "service_name": "first",
+      "job_name":"first-1",
       "regions": ["us-east-1","ap-south-1"]
     },
     {
@@ -24,6 +25,7 @@
         ]
       },
       "service_name": "second",
+      "job_name":"second-1",
       "regions": ["ap-south-1"]
 
     }

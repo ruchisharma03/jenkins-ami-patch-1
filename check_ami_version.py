@@ -9,7 +9,7 @@ from utils.utils import (get_latest_ami_version,
 
 
 CONFIG_FILE_PATH = getenv(
-    'AWS_SERVICE_CONFIG_FILE')  # config file path
+    'AWS_SERVICE_CONFIG_FILE') or './config/config.json' # config file path
 
 # check the ami versions
 def check_ami_versions():
@@ -27,6 +27,8 @@ def check_ami_versions():
 
     for each_service in services:
 
+        job_name = each_service['job_name']
+
         matched = False
 
         # image filter
@@ -34,11 +36,11 @@ def check_ami_versions():
         # service name to filter launch config
         service_name = each_service['service_name']
 
-        status_map[service_name] = {}
+        status_map[job_name] = {}
 
         for each_region in each_service['regions']:
 
-            status_map[service_name][each_region] = {}
+            status_map[job_name][each_region] = {}
 
             # boto3 service clients
             ec2_client = boto3_clients[each_region]['EC2']
@@ -62,7 +64,7 @@ def check_ami_versions():
                 matched = False
 
             # store the output
-            status_map[service_name][each_region] = {
+            status_map[job_name][each_region] = {
 
                 'LATEST_AMI_ID': latest_ami_id,
                 'LAUNCH_CONFIG_AMI_ID': launch_config_ami_id,
@@ -70,7 +72,7 @@ def check_ami_versions():
 
             }
 
-        status_map[service_name]['AMI_CHANGED'] = not matched
+        status_map[job_name]['AMI_CHANGED'] = not matched
 
     return status_map
 
