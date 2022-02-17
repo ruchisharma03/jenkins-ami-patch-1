@@ -74,14 +74,14 @@ pipeline {
 
                     if(!previousJobResult) {
 
-                      throw new Exception("Hello world");
+                      throw new Exception("${eachJob} failed");
                     }
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
                   }
                 } catch (Exception e) {
 
-                  echo "${eachJob} failed"
+                  pirntln(e.getMessage());
                   // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
                   // throw e;
 
