@@ -68,7 +68,7 @@ pipeline {
                 try {
                   stage("QA-${eachJob}") {
                     
-                    def jobResult = build job: "${eachJob}",propagate: false 
+                    def jobResult = build job: "${eachJob}"
 
                     previousJobResult = (jobResult.result == 'SUCCESS' ? true : false);
 
