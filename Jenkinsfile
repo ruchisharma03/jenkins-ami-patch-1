@@ -68,7 +68,7 @@ pipeline {
                 try {
                   stage("QA-${eachJob}") {
                     
-                    previousJobResult = build job: "${eachJob}"
+                    previousJobResult = build job: "${eachJob}",propagate: false 
 
                     println(previousJobResult)
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
