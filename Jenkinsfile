@@ -70,6 +70,8 @@ pipeline {
                     
                     def jobResult = build job: "${eachJob}",propagate: true
 
+                    println(jobResult);
+
                     previousJobResult = (jobResult.result == 'SUCCESS' ? true : false);
 
                     if(!previousJobResult) {
