@@ -1,6 +1,6 @@
 //  store 'region': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
-def previousJobResult;
+def previousJobResult = true;
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
 pipeline {
@@ -63,14 +63,14 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
+              if (serviceAmiIdChanged["${eachJob}"] == 'False' && previousJobResult) {
 
                 try {
                   stage("QA-${eachJob}") {
                     
-                    previousJobResult = build job: "${eachJob}",propagate: false 
+                    def jobResult = build job: "${eachJob}",propagate: false 
 
-                    println(previousJobResult)
+                    previousJobResult = (jobResult.result == 'SUCCESS' ? true : false);
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
                   }
