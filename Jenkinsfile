@@ -81,7 +81,7 @@ pipeline {
                   }
                 } catch (Exception e) {
 
-                  pirntln(e.getMessage());
+                  println(e.getMessage());
                   // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
                   // throw e;
 
