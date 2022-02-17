@@ -74,7 +74,7 @@ pipeline {
 
                     if(!previousJobResult) {
 
-                      throw new Exception();
+                      throw new Exception("Hello world");
                     }
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
