@@ -1,12 +1,13 @@
 //  store 'region': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
+def previousJobResult;
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
 pipeline {
   agent none
-  // triggers {
-  //   cron(cron_string)
-  // }
+  triggers {
+    cron(cron_string)
+  }
   parameters {
 
     string(name: 'AWS_AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent which has python3 and aws profile configured')
@@ -66,8 +67,10 @@ pipeline {
 
                 try {
                   stage("QA-${eachJob}") {
+                    
+                    previousJobResult = build job: "${eachJob}"
 
-                    build job: "${eachJob}"
+                    println(previousJobResult)
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
 
                   }
