@@ -66,7 +66,7 @@ pipeline {
 
                 try {
                     
-                    stage{
+                    stage("${eachJob}"){
                       build job: "${eachJob}"
                     }
 
