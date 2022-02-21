@@ -68,6 +68,7 @@ pipeline {
                     
                     stage("${eachJob}"){
                     def result = build job: "${eachJob}"
+                    println(currentBuild.actions);
                     }
 
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
