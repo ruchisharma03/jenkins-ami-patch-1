@@ -66,26 +66,15 @@ pipeline {
               if (serviceAmiIdChanged["${eachJob}"] == 'False' && previousJobResult) {
 
                 try {
-                  stage("QA-${eachJob}") {
                     
-                    def jobResult = build job: "${eachJob}",propagate: true
+                    build job: "${eachJob}"
 
-                    println(jobResult);
-
-                    previousJobResult = (jobResult.result == 'SUCCESS' ? true : false);
-
-                    if(!previousJobResult) {
-
-                      throw new Exception("${eachJob} failed");
-                    }
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
-
-                  }
                 } catch (Exception e) {
 
                   println(e.getMessage());
                   // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
-                  // throw e;
+                  throw e;
 
                 }
 
@@ -97,11 +86,8 @@ pipeline {
 
         }
       }
-
     }
-
   }
-
   post {
     always {
       echo "====++++always++++===="
