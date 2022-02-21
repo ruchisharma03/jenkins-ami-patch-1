@@ -1,6 +1,5 @@
 //  store 'region': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
-def previousJobResult = true;
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
 pipeline {
@@ -63,7 +62,7 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False' && previousJobResult) {
+              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
 
                 try {
                     
