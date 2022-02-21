@@ -66,7 +66,9 @@ pipeline {
 
                 try {
                     
-                    build job: "${eachJob}",wait: true
+                    stage{
+                      build job: "${eachJob}"
+                    }
 
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
                 } catch (Exception e) {
