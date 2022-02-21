@@ -32,7 +32,7 @@ pipeline {
 
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
             println(result);
-
+           
             for (String jobStatus: result.split(',')) {
 
               String[] eachjobStatus = jobStatus.split(':');
@@ -62,13 +62,12 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
+              if (serviceAmiIdChanged["${eachJob}"] == 'True') {
 
                 try {
                     
                     stage("${eachJob}"){
                     def result = build job: "${eachJob}"
-                    println(currentBuild.upstreamBuilds);
                     }
 
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'

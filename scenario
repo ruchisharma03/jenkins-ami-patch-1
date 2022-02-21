@@ -1,0 +1,23 @@
+PI -> publish ami patches(month 1, 15-20 date)
+
+CloudFormation -> QA,UAT,PROD 
+
+manually trigger jobs.
+
+2. 
+
+1 -> ami check 
+
+2 -> service -> ami change 
+      | 1. main job 
+            | 
+             5 child jobs  (downstream)
+        2. main job 
+            |
+              4 child jobs 
+
+
+
+
+
+
