@@ -10,24 +10,22 @@ pipeline {
   parameters {
 
     string(name: 'AWS_AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent which has python3 and aws profile configured')
-    string(name: 'AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent on which to execute the JOBS')
-    string(name: 'JOBCONFIG_FILE_PATH', defaultValue: 'config/jobconfig.json', description: 'Path of the job config file')
     string(name: 'AWS_SERVICE_CONFIG_FILE', defaultValue: './config/config.json', description: 'Path of the aws service config file')
-    string(name: 'JOB_NAMES', description: 'List of jobs separated by commas in build sequence')
+    string(name: 'JOB_NAMES', description: 'List of jobs separated by commas in build sequence (job names for the service).')
   }
 
   stages {
     stage('check the ami version') {
       agent any
       steps {
-        withCredentials([
-          [
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "aws-creds",
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-          ]
-        ]) {
+        // withCredentials([
+        //   [
+        //     $class: 'AmazonWebServicesCredentialsBinding',
+        //     credentialsId: "aws-creds",
+        //     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        //     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        //   ]
+        // ]) {
           script {
 
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
@@ -50,8 +48,6 @@ pipeline {
     // create the jobs dynamically
     stage('build the QA services if the latest ami id is present') {
 
-      agent any
-
       steps {
 
         script {
@@ -67,7 +63,9 @@ pipeline {
                 try {
                     
                     stage("${eachJob}"){
-                    def result = build job: "${eachJob}"
+                      
+                      build job: "${eachJob}"
+                    
                     }
 
                     // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
@@ -86,7 +84,7 @@ pipeline {
           }
 
         }
-      }
+      // }
     }
   }
   post {
@@ -95,7 +93,12 @@ pipeline {
     }
     success {
       echo "====++++only when successful ++++===="
-      // jiraSendBuildInfo site: 'raghav-personal.atlassian.net'
+      script{
+
+        def jiraResult = sh(returnStdout: true, script: 'python3 jira/create_issue.py')
+        println(jiraResult)
+
+      }
     }
     failure {
       echo "====++++only when failed++++===="

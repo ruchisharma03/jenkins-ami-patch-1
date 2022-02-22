@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import boto3
 
-def prepare_boto_clients(services, regions):
 
+def prepare_boto_clients(services, regions):
     '''
     @purpose: prepare the boto3 clients per region and service
 
@@ -40,9 +40,10 @@ def get_latest_ami_version(client, filters):
         images = client.describe_images(Filters=filters)
         if images and len(images['Images']):
 
-            images['Images'].sort(key=lambda image: image['CreationDate'],reverse=True)
+            images['Images'].sort(
+                key=lambda image: image['CreationDate'], reverse=True)
             return images['Images'][0]['ImageId']
-    return None 
+    return None
 
 
 def get_service_ami_version_from_lc(client, service_name):
@@ -56,13 +57,13 @@ def get_service_ami_version_from_lc(client, service_name):
     '''
     if service_name:
         launch_configurations = client.describe_launch_configurations()
-       
+
         if launch_configurations and len(launch_configurations['LaunchConfigurations']):
             filtered_launch_configurations = list(filter(lambda lc: lc['LaunchConfigurationName'].find(
                 service_name) != -1, launch_configurations['LaunchConfigurations']))
             if len(filtered_launch_configurations):
                 return filtered_launch_configurations[0]['ImageId']
-    return None 
+    return None
 
 
 def compare_ami_versions(this_ami, that_ami):
@@ -75,3 +76,5 @@ def compare_ami_versions(this_ami, that_ami):
     @returns: boolean 
     '''
     return this_ami == that_ami
+
+
