@@ -93,10 +93,12 @@ pipeline {
     }
     success {
       echo "====++++only when successful ++++===="
-      script{
+      node("${AWS_AGENT_LABEL}"){
 
-        def jiraResult = sh(returnStdout: true, script: 'python3 jira/create_issue.py')
-        println(jiraResult)
+        script{
+            def issueResult = sh(returnStdout: true, script: 'python3 scripts/create_issue.py')
+            println(issueResult)
+        }
 
       }
     }
