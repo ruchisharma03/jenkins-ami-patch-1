@@ -1,0 +1,48 @@
+//  store 'region': 'latest ami is present or not'
+def serviceAmiIdChanged = [: ]
+String cron_string = "0 0 */20 * *" // cron every 20th of the month
+
+pipeline {
+  agent none
+  triggers {
+    cron(cron_string)
+  }
+  parameters {
+
+    string(name: 'TICKET_NUMBER', description: 'Jira Ticket Number')
+    string(name: 'FIELD_PATH', description: 'Field on the Jira Issue to Watch')
+  }
+
+  stages {
+    stage('check the jira field status') {
+      agent any
+      steps {
+       withCredentials([[
+            $class: 'UsernamePasswordMultiBinding',
+            credentialsId: "jira-cred",
+            usernameVariable: 'JIRA_USERNAME',
+            passwordVariable: 'JIRA_API_TOKEN',
+        ]]) {
+            
+          script {
+            
+            def result = sh(returnStdout: true, script: 'python3 scripts/check_status_field.py')
+            println(result);
+          
+          }
+        }
+      }
+    }
+  post {
+    always {
+      echo "====++++always++++===="
+    }
+    success {
+      echo "====++++only when successful ++++===="
+    }
+    failure {
+      echo "====++++only when failed++++===="
+    }
+  }
+
+}
