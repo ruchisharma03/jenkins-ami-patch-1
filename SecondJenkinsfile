@@ -40,6 +40,7 @@ pipeline {
 
       script {
           println(params.FIELD_TARGET_VALUE)
+          println(status)
           if(status == params.FIELD_TARGET_VALUE){
 
               echo "hello building...."
