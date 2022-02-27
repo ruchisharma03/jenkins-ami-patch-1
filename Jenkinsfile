@@ -106,11 +106,9 @@ pipeline {
             
             unstash "jiraSource"
             unstash "jiraScript"
-            script {
-            
-              def result = sh(returnStdout: true, script: 'python3 scripts/create_issue.py')
-              println(result);
-            }
+            sh """
+              python3 scripts/create_issue.py
+              """
         }
 
       }

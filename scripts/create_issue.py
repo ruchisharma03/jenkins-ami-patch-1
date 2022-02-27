@@ -13,4 +13,4 @@ API_TOKEN = os.getenv("JIRA_API_TOKEN")
 jira = JiraAPI(
     USERNAME, API_TOKEN, "config/jira.config.yaml")
 
-jira.create_issue()
+print(jira.create_issue())
