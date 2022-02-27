@@ -34,11 +34,12 @@ pipeline {
       }
     }
   // create the jobs dynamically
-  stage('build the QA services if the latest ami id is present') {
+  stage('build the UAT and prod jobs') {
 
     steps {
 
       script {
+          println(params.FIELD_TARGET_VALUE)
           if(status == params.FIELD_TARGET_VALUE){
 
               echo "hello building...."
