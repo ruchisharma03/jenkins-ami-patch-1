@@ -18,14 +18,14 @@ pipeline {
     stage('check the ami version') {
       agent any
       steps {
-        // withCredentials([
-        //   [
-        //     $class: 'AmazonWebServicesCredentialsBinding',
-        //     credentialsId: "aws-creds",
-        //     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-        //     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-        //   ]
-        // ]) {
+        withCredentials([
+          [
+            $class: 'AmazonWebServicesCredentialsBinding',
+            credentialsId: "aws-creds",
+            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+          ]
+        ]) {
           script {
 
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
@@ -84,7 +84,7 @@ pipeline {
           }
 
         }
-      // }
+      }
     }
   }
   post {
@@ -94,10 +94,17 @@ pipeline {
     success {
       echo "====++++only when successful ++++===="
       node("${AWS_AGENT_LABEL}"){
-
-        script{
-            def issueResult = sh(returnStdout: true, script: 'python3 scripts/create_issue.py')
-            println(issueResult)
+        withCredentials([[
+            $class: 'UsernamePasswordMultiBinding',
+            credentialsId: "jira-cred",
+            usernameVariable: 'JIRA_USERNAME',
+            passwordVariable: 'JIRA_API_TOKEN',
+        ]]) {
+            sh """
+              export JIRA_USERNAME="${JIRA_USERNAME}"
+              export JIRA_API_TOKEN="${JIRA_API_TOKEN}"
+              python3 scripts/create_issue.py'
+              """
         }
 
       }

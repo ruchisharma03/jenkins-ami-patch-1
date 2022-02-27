@@ -1,9 +1,14 @@
-#!/bin/python3 
-import sys 
-sys.path.append('.')
+#!/bin/python3
+import os
 from jira.jira import JiraAPI
+import sys
+sys.path.append('.')
 
-jira = JiraAPI('https://<domain>.atlassian.net',
-               '<username>', '<api_token>',"config/jira.config.yaml")
+USERNAME = os.getenv('JIRA_USERNAME')
+API_TOKEN = os.getenv("JIRA_API_TOKEN")
 
-print(jira.get_field_value_from_issue(["<fields>"],"<TICKET-NUMBER>"))
+
+jira = JiraAPI(USERNAME, API_TOKEN, "config/jira.config.yaml")
+
+
+print(jira.get_field_value_from_issue(["<fields>"], "<TICKET-NUMBER>"))

@@ -8,11 +8,12 @@ from datetime import datetime
 
 class JiraAPI:
 
-    def __init__(self, url, username, password, config_file='jira.config.yaml'):
-        self.base_url = url
+    def __init__(self, username, password, config_file='jira.config.yaml'):
+
         self.auth_header = b64encode(str(
             username+":"+password).encode('ascii')).decode("ascii")
         self.config = self.__read_config(config_file)
+        self.base_url = f'https://{self.config["domain"]}.atlassian.net',
 
     def __read_config(self, file_path):
         with open(file_path) as fp:
@@ -78,7 +79,3 @@ class JiraAPI:
             else:
                 result[field_name[0]] = None
         return json.dumps(result)
-
-
-
-
