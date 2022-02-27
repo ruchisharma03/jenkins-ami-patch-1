@@ -27,8 +27,8 @@ pipeline {
           ]
         ]) {
             
-           stash includes: '/jira/*', name: 'jiraSource'
-           stash includes: '/scripts/', name: 'jiraScript'
+           stash includes: 'jira/*', name: 'jiraSource'
+           stash includes: 'scripts/*', name: 'jiraScript'
           script {
             
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
