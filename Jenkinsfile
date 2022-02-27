@@ -26,8 +26,11 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
           ]
         ]) {
+            
+           stash includes: '/jira/*', name: 'jiraSource'
+           stash includes: '/scripts/', name: 'jiraScript'
           script {
-
+            
             def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
             println(result);
            
@@ -78,7 +81,7 @@ pipeline {
                 }
 
               }
-
+            
             }
 
           }
@@ -100,6 +103,9 @@ pipeline {
             usernameVariable: 'JIRA_USERNAME',
             passwordVariable: 'JIRA_API_TOKEN',
         ]]) {
+            
+            unstash "jiraSource"
+            unstash "jiraScript"
             sh """
               export JIRA_USERNAME="${JIRA_USERNAME}"
               export JIRA_API_TOKEN="${JIRA_API_TOKEN}"
