@@ -3,5 +3,5 @@ domain: raghav-personal
 projectKey: LEAR
 issueType: Task
 fields:
-  description: "test 1"
-  summary: "Test one"
+  description: "test latest from jenkins"
+  summary: "Test latest"
