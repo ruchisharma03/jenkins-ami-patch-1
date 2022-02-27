@@ -17,4 +17,4 @@ jira = JiraAPI(USERNAME, API_TOKEN, "config/jira.config.yaml")
 
 field =loads(jira.get_field_value_from_issue(FIELD_PATH, TICKET_NUMBER))
 
-print(field.values()[0])
+print(list(field.values())[0])
