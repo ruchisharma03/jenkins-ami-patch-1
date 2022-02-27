@@ -103,7 +103,7 @@ pipeline {
             sh """
               export JIRA_USERNAME="${JIRA_USERNAME}"
               export JIRA_API_TOKEN="${JIRA_API_TOKEN}"
-              python3 scripts/create_issue.py'
+              python3 scripts/create_issue.py
               """
         }
 
