@@ -15,4 +15,6 @@ FIELD_PATH = os.getenv('FIELD_PATH').split(',')
 jira = JiraAPI(USERNAME, API_TOKEN, "config/jira.config.yaml")
 
 
-print(jira.get_field_value_from_issue(FIELD_PATH, TICKET_NUMBER))
+field =jira.get_field_value_from_issue(FIELD_PATH, TICKET_NUMBER)
+field_name,field_value = field.strip("{").strip("}").split(",")[0].split(":")
+print(field_name,field_value)
