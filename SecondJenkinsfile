@@ -41,7 +41,7 @@ pipeline {
       script {
           println(params.FIELD_TARGET_VALUE)
           println(status)
-          if(status.equals("${params.FIELD_TARGET_VALUE}")){
+          if(status.equals(params.FIELD_TARGET_VALUE)){
 
               echo "hello building...."
 
