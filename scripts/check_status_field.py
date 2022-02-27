@@ -17,4 +17,4 @@ jira = JiraAPI(USERNAME, API_TOKEN, "config/jira.config.yaml")
 
 field =jira.get_field_value_from_issue(FIELD_PATH, TICKET_NUMBER)
 field_name,field_value = field.strip("{").strip("}").split(",")[0].split(":")
-print(field_value.strip('"').strip(""))
+print(field_value.lstrip('"').rstrip('"').strip())
