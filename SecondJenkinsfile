@@ -42,6 +42,11 @@ pipeline {
       script {
           println(params.FIELD_TARGET_VALUE)
           println(status)
+          properties([
+            parameters([
+              string(defaultValue: "${status}" name: 'FIELD_TARGET_VALUE')
+            ])
+          ])
           if(status.equals(params.FIELD_TARGET_VALUE)){
 
               echo "hello building...."
