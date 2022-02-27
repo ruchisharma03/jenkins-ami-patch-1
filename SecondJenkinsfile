@@ -7,7 +7,7 @@ pipeline {
   }
   parameters {
 
-    string(name: 'TICKET_NUMBER', description: 'Jira Ticket Number')
+    string(name: 'JIRA_TICKET_NUMBER', description: 'Jira Ticket Number')
     string(name: 'FIELD_PATH', description: 'Field on the Jira Issue to Watch')
   }
 
