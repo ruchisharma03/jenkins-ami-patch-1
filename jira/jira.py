@@ -64,7 +64,7 @@ class JiraAPI:
 
         response = requests.get(url, headers=headers)
 
-        print(response)
+        print(url,response)
 
         fields = json.loads(response.text)["fields"]
 
