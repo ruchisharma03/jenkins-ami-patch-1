@@ -61,7 +61,7 @@ pipeline {
 
             for (String eachJob: jobList) {
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
+              if (serviceAmiIdChanged["${eachJob}"].equals('False')) {
 
                 try {
                     
