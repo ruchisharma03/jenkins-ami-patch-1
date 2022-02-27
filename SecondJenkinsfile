@@ -24,8 +24,7 @@ pipeline {
         ]]) {
             
           script {
-            println(status);
-            
+  
             status = sh(returnStdout: true, script: 'python3 scripts/check_status_field.py')
             println(status);
           
