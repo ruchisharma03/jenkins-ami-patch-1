@@ -1,8 +1,9 @@
 #!/bin/python3
 import os
-from jira.jira import JiraAPI
 import sys
 sys.path.append('.')
+
+from jira.jira import JiraAPI
 
 
 USERNAME = os.getenv('JIRA_USERNAME')
