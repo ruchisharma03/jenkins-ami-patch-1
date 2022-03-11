@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import boto3
-
+from datetime import datetime
 
 def prepare_boto_clients(services, regions):
     '''
@@ -39,9 +39,11 @@ def get_latest_ami_version(client, filters):
     if filters:
         images = client.describe_images(Filters=filters)
         if images and len(images['Images']):
-
+            for each_image in images['Images']:
+                each_image['CreationDate'] = datetime.strptime(each_image['CreationDate'], "%Y-%m-%dT%H:%M:%S.%fZ")
             images['Images'].sort(
                 key=lambda image: image['CreationDate'], reverse=True)
+            print(  images['Images'][0]['ImageId'])
             return images['Images'][0]['ImageId']
     return None
 

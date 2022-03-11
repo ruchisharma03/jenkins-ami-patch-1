@@ -7,27 +7,16 @@
         "filters": [
           {
             "Name": "name",
-            "Values": ["postgres-sql-ami"]
+            "Values": ["ansible*"]
+          },{
+            "Name": "tag:env",
+            "Values": ["test-raghav"]
           }
         ]
       },
       "service_name": "first",
       "job_name":"first",
       "regions": ["us-east-1","ap-south-1"]
-    },
-    {
-      "images": {
-        "filters": [
-          {
-            "Name": "name",
-            "Values": ["postgres-sql-ami"]
-          }
-        ]
-      },
-      "service_name": "second",
-      "job_name":"second",
-      "regions": ["ap-south-1"]
-
     }
   ]
 }

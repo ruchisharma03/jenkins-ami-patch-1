@@ -52,7 +52,7 @@ class JiraAPI:
 
         res = json.loads(response.text)
 
-        if "self" in res:
+        if "self" in res.keys():
             del res["self"]
 
         res["jira_ticket_url"] = f"{self.base_url}/browse/{res['key']}"
