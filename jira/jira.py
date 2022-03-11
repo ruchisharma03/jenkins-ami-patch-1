@@ -3,7 +3,6 @@ from base64 import b64encode
 import yaml
 import requests
 import json
-from datetime import datetime
 
 
 class JiraAPI:
