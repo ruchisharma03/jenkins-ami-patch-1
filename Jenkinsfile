@@ -11,82 +11,47 @@ pipeline {
 
     string(name: 'AWS_AGENT_LABEL', defaultValue: 'any', description: 'Label of the Agent which has python3 and aws profile configured')
     string(name: 'AWS_SERVICE_CONFIG_FILE', defaultValue: './config/config.json', description: 'Path of the aws service config file')
-    string(name: 'JOB_NAMES', description: 'List of jobs separated by commas in build sequence (job names for the service).')
   }
 
   stages {
+    //  check for the ami version and if the ami is different , then go to the next stage.
     stage('check the ami version') {
       agent any
       steps {
-        withCredentials([
-          [
-            $class: 'AmazonWebServicesCredentialsBinding',
-            credentialsId: "aws-creds",
-            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-          ]
-        ]) {
-            
-           stash includes: 'jira/*', name: 'jiraSource'
-           stash includes: 'scripts/*', name: 'jiraScript'
-          script {
-            
-            def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
-            println(result);
-           
-            for (String jobStatus: result.split(',')) {
 
-              String[] eachjobStatus = jobStatus.split(':');
+        script {
 
-              if (eachjobStatus.size() > 1) {
+          def result = sh(returnStdout: true, script: 'python3 check_ami_version.py')
+          println(result);
 
-                serviceAmiIdChanged[eachjobStatus[0]] = eachjobStatus[1];
-              }
+          for (String jobStatus: result.split(',')) {
 
+            String[] eachjobStatus = jobStatus.split(':');
+
+            if (eachjobStatus.size() > 1) {
+
+              serviceAmiIdChanged[eachjobStatus[0]] = eachjobStatus[1];
             }
+
           }
         }
       }
     }
     // create the jobs dynamically
-    stage('build the QA services if the latest ami id is present') {
+    stage('build the QA-service-01') {
 
       steps {
 
-        script {
+        build job: "first"
 
-          String[] jobList = params.JOB_NAMES.split(',');
+      }
+    }
 
-          if (jobList.size() > 0) {
+    stage('build the QA-service-02') {
+      steps {
 
-            for (String eachJob: jobList) {
+        build job: "second"
 
-              if (serviceAmiIdChanged["${eachJob}"] == 'False') {
-
-                try {
-                    
-                    stage("${eachJob}"){
-                      
-                      build job: "${eachJob}"
-                    
-                    }
-
-                    // emailext body: "${eachJob} succeeded", recipientProviders: [buildUser()], subject: "JOB ${eachJob} SUCCESS", to: 'ragaws1674@gmail.com'
-                } catch (Exception e) {
-
-                  println(e.getMessage());
-                  // emailext body: "${eachJob} failed", recipientProviders: [buildUser()], subject: "JOB ${eachJob} FAILED", to: 'ragaws1674@gmail.com'
-                  throw e;
-
-                }
-
-              }
-            
-            }
-
-          }
-
-        }
       }
     }
   }
@@ -96,22 +61,6 @@ pipeline {
     }
     success {
       echo "====++++only when successful ++++===="
-      node("${AWS_AGENT_LABEL}"){
-        withCredentials([[
-            $class: 'UsernamePasswordMultiBinding',
-            credentialsId: "jira-cred",
-            usernameVariable: 'JIRA_USERNAME',
-            passwordVariable: 'JIRA_API_TOKEN',
-        ]]) {
-            
-            unstash "jiraSource"
-            unstash "jiraScript"
-            sh """
-              python3 scripts/create_issue.py
-              """
-        }
-
-      }
     }
     failure {
       echo "====++++only when failed++++===="
