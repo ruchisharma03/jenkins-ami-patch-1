@@ -1,4 +1,4 @@
-//  store 'region': 'latest ami is present or not'
+//  store 'servicename': 'latest ami is present or not'
 def serviceAmiIdChanged = [: ]
 String cron_string = "0 0 */20 * *" // cron every 20th of the month
 
