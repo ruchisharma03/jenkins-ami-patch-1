@@ -39,7 +39,7 @@ pipeline {
            while(!isJobRunning){
 
               isJobRunning = true;
-              build job: "Second Job"
+              build job: "conversations-submission/content-origin-registry/10-dev-code-build"
 
            }
             isJobRunning = false;
