@@ -68,7 +68,6 @@ def get_service_ami_version_from_lc(client, service_name):
                 NextToken=next_token)
             next_token = launch_configurations.get('NextToken', None)
             launch_configuration_dict['LaunchConfigurations'].extend(launch_configurations['LaunchConfigurations'])
-        print(launch_configuration_dict)
         if launch_configuration_dict and len(launch_configuration_dict['LaunchConfigurations']):
             filtered_launch_configurations = list(filter(lambda lc: lc['LaunchConfigurationName'].find(
                 service_name) != -1, launch_configuration_dict['LaunchConfigurations']))
